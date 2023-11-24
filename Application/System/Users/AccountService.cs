@@ -44,7 +44,7 @@ namespace Application.System.Users
             var user = await _userManager.FindByNameAsync(request.UserName);
 
             if (user == null) return new ApiErrorResult<LoginViewModel>("Tài khoản này không tồn tại");
-            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
+            var result = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, request.RememberMe, true);
             if (!result.Succeeded)
             {
                 return new ApiErrorResult<LoginViewModel>("Sai mật khẩu, vui lòng nhập lại");
